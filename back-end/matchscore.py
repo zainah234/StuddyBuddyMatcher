@@ -31,54 +31,9 @@ def sort_matches(students_dict, main_id):
         if student_id != main_id:
             match = generate_match(students_dict, main_id, student_id)
 
-
             if match[0] > 0:
                 matches[student_id] = match
     
     sorted_matches = sorted(matches.items(), key = lambda x: (-x[1][0], -x[1][1]))
 
     return sorted_matches
-
-
-students_dict = {
-    "student1": {
-        "BIO362H5 F": ["LEC 0101", "PRA 0101"],
-        "CSC236H1 F": ["LEC 5101", "TUT 5103"],
-        "MAT236H5 F": ["LEC 0101", "TUT 0103"],
-    },
-    "student2": {
-        "BIO362H5 F": ["LEC 0101", "PRA 0101"],
-        "CSC236H1 F": ["LEC 5101", "TUT 5103"],
-        "MAT236H5 F": ["LEC 0101", "TUT 0103"],
-    },
-    "student3": {
-        "BIO362H5 F": ["LEC 0101"],
-        "CSC236H1 F": ["LEC 5101", "TUT 5103"],
-        "MAT236H5 F": ["LEC 0101"],
-    },
-    "student4": {
-        "BIO362H5 F": ["LEC 0101"],
-        "CSC236H1 F": ["LEC 5101"],
-        "MAT236H5 F": ["LEC 0201"],
-    },
-    "student5": {
-        "BIO362H5 F": ["LEC 0101", "PRA 0101"],
-        "CSC236H1 F": ["LEC 5101", "TUT 5103"],
-    },
-    "student6": {
-        "BIO362H5 F": ["LEC 0101"],
-        "CSC236H1 F": ["LEC 5101"],
-    },
-    "student7": {
-        "BIO362H5 F": ["LEC 0101", "PRA 0101"],
-    },
-    "student8": {
-        "BIO362H5 F": ["LEC 0201"],
-    },
-    "student9": {
-        "PHY100H5 F": ["LEC 0101"],
-    },
-}
-
-top_matches_result = sort_matches(students_dict, "student1")
-print(top_matches_result)
