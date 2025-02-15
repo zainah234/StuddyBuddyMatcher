@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import Dashboard from './dashboard/Dashboard';
 import reportWebVitals from './reportWebVitals';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Dashboard />
   </React.StrictMode>
 );
 
