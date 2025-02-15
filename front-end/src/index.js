@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Dashboard from './dashboard/Dashboard';
+import Login from './Login/Login';
 import reportWebVitals from './reportWebVitals';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Dashboard />
+    <Login />
   </React.StrictMode>
 );
 
