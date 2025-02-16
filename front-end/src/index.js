@@ -4,11 +4,13 @@ import './index.css';
 import Profile from './dashboard/Dashboard';
 import Login from './Login/Login';
 import SignUp from './SignUp/SignUp';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { useEffect } from "react";
 import { RouterProvider, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { createBrowserRouter } from "react-router-dom";
+import Dashboard from './dashboard/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -24,17 +26,19 @@ const router = createBrowserRouter([
     path: '/SignUp',
     element: <SignUp />
   },
+  {
+    path: '/dashboard',
+    element: <Dashboard />
+  },
 
 ]);
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-<<<<<<< Updated upstream
     <RouterProvider router={router}/>
-=======
-    <Profile />
->>>>>>> Stashed changes
+    <Dashboard />
   </React.StrictMode>
 );
 

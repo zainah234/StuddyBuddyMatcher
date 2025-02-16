@@ -23,7 +23,8 @@ const Login = () => {
                 </div>
                 {/* verify login! make fields red if invalid + message that no such email or password exists*/}
                 <div classname='login'>
-                    <button class="w-40 bg-purple-500 text-white p-2 rounded hover:bg-purple-600">login</button>
+                <Link to="/dashboard" className="text-blue-500 hover:text-blue-700">
+                    <button class="w-40 bg-purple-500 text-white p-2 rounded hover:bg-purple-600">login</button></Link>
                 </div>
                 <div className="forgot-password">
                 <span> forgot password?</span>

@@ -18,17 +18,29 @@ import { useState } from 'react';
 import { popEffect, responsive } from "./styles";
 
 
-function Matches({name="Unknown", pronouns="they/them", discord="discord", facebook="facebook", whatsapp="whatsapp", phone_nr="phone number", instagram="instagram", matchRate=45}) {
-  
-  const [index, setIndex] = useState(0);
-
-  const handleSelect = (selectedIndex) => {
-    setIndex(selectedIndex);
+function Matches({matches}) {
+  const [showFirst, setFirst] = useState(true);
+  const index=0;
+  const handleClickleft = () => {
+    setFirst(true);  // Increment the count value
   };
-
+  const handleClickright = () => {
+    setFirst(false);  // Increment the count value
+  };
   return (
+    
     <div className="flex flex-row gap-2 justify-between lex-grow items-center gap-4 bg-black/60 rounded-md transform transition-all duration-300 ease-in-out hover:scale-105 p-8 box-border">
-    <IoIosArrowDropleftCircle size={36} />
+    <IoIosArrowDropleftCircle size={36} onClick={handleClickleft}/>
+    {showFirst ?  <Match name={matches[index][0]} matchRate={Math.round(((matches[index][1][0]+matches[index][1][1])/12)*100)}/> : null}
+    {showFirst ?  null : <Match name={matches[index+1][0]} matchRate={Math.round(((matches[index+1][1][0]+matches[index+1][1][1])/12)*100)}/>}
+   
+    <IoIosArrowDroprightCircle size={36} onClick={handleClickright}/>
+    </div>
+  );
+}
+
+function Match ({name="Jenny", pronouns="they/them", discord="userdis", facebook="jenny", whatsapp="", phone_nr="phone number", instagram="", matchRate=45}){
+  return (
     <div className="flex flex-col items-center gap-4">
     <div className="w-2/3 bg-cover bg-center rounded-full " style={{ backgroundImage: `url(${matchProfile})` }}><CircularProgressbar value={matchRate} styles={buildStyles({
               // Rotation of path and trail, in number of turns (0-1)
@@ -66,8 +78,6 @@ function Matches({name="Unknown", pronouns="they/them", discord="discord", faceb
               {phone_nr ?  <div className={`${popEffect}`}>{<FaSquarePhone size={36} />}</div> : null}
             </div>
             </div>
-    </div>
-    <IoIosArrowDroprightCircle size={36} />
     </div>
   );
 }
