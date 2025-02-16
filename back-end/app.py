@@ -5,7 +5,10 @@ from repositories.student_repository import StudentRepository
 from repositories.schedule_repository import ScheduleRepository
 from repositories.base import SessionLocal
 
+from matchscore import sort_matches
+
 bp = Blueprint('students', __name__, url_prefix='/students')
+
 
 @bp.route('/all', methods=['GET'])
 def get_students():
@@ -13,6 +16,7 @@ def get_students():
     student_repo = StudentRepository(session)
     students = student_repo.get_students()
     return jsonify([student.to_dict() for student in students])
+
 
 @bp.route('/<string:email>', methods=['GET'])
 def get_student(email):
@@ -22,6 +26,7 @@ def get_student(email):
     if student is None:
         abort(404)
     return jsonify(student.to_dict())
+
 
 @bp.route('/', methods=['POST'])
 def add_student():
@@ -40,13 +45,16 @@ def add_student():
     pronouns = data.get('pronouns')
     password = data.get('password')
 
-
-    new_student = student_repo.add_student(email, first_name, last_name, pronouns, post, insta, discord, facebook, whatsapp, phone_nr, password)
+    new_student = student_repo.add_student(email, first_name, last_name,
+                                           pronouns, post, insta, discord,
+                                           facebook, whatsapp, phone_nr,
+                                           password)
     if new_student:
         session.commit()
         return jsonify(new_student.to_dict()), 201
     else:
         abort(500)
+
 
 @bp.route('/<int:sid>', methods=['DELETE'])
 def delete_student(sid):
@@ -58,6 +66,7 @@ def delete_student(sid):
         return '', 204
     else:
         abort(404)
+
 
 @bp.route('/<string:email>/courses', methods=['GET'])
 def retrieve_courses_for_student(email):
@@ -95,7 +104,8 @@ def get_student_profile(email):
         abort(404, description="Student not found")
 
     enrollments = schedule_repo.get_schedule_by_student(email)
-    course_objects = [course_repo.get_course_by_id(enrollment.cid) for enrollment in enrollments]
+    course_objects = [course_repo.get_course_by_id(enrollment.cid) for
+                      enrollment in enrollments]
 
     courses = [
         {
@@ -107,6 +117,27 @@ def get_student_profile(email):
         }
         for course_obj in course_objects
     ]
+
+    students = student_repo.get_students()
+    student_info = {student.email: {} for student in students}
+    for student_email in student_info.keys():
+
+        enrolled_courses = {}
+        enrollments_curr_student = schedule_repo.get_schedule_by_student(student_email)
+        for enrollment_curr in enrollments_curr_student:
+            course_obj_curr = course_repo.get_course_by_id(enrollment_curr.cid)
+            enrolled_courses[course_obj_curr.course_name] = [
+                course_obj_curr.lec_sections,
+                course_obj_curr.tut_sections,
+                course_obj_curr.pra_sections
+            ]
+
+            enrolled_courses[course_obj_curr.course_name] = [
+                sect for sect in enrolled_courses[course_obj_curr.course_name] if sect]
+
+        student_info[student_email] = enrolled_courses
+
+    sorted_matches = sort_matches(student_info, student.email)
 
     # JSON response
     student_profile = {
@@ -120,7 +151,9 @@ def get_student_profile(email):
         "facebook": student.facebook,
         "whatsapp": student.whatsapp,
         "phone_nr": student.phone_nr,
-        "courses": courses
+        "courses": courses,
+        "matches": sorted_matches
     }
 
     return jsonify(student_profile)
+

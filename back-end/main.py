@@ -1,6 +1,5 @@
-import psycopg2
-from flask import Flask, jsonify
-from repositories.base import Base, engine, SessionLocal
+from flask import Flask
+from repositories.base import Base, engine
 from app import bp
 import logging
 
