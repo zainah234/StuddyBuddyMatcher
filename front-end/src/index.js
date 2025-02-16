@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Dashboard from './dashboard/Dashboard';
+import Profile from './dashboard/Dashboard';
 import Login from './Login/Login';
 import SignUp from './SignUp/SignUp';
 import reportWebVitals from './reportWebVitals';
@@ -30,7 +30,11 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+<<<<<<< Updated upstream
     <RouterProvider router={router}/>
+=======
+    <Profile />
+>>>>>>> Stashed changes
   </React.StrictMode>
 );
 

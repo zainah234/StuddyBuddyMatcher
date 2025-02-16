@@ -2,6 +2,14 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+.main-bg {
+  @apply bg-gradient-to-r from-blue-400 via-purple-300 to-pink-400
+}
+div {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
