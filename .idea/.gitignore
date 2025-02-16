@@ -1,0 +1,16 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+# Ignore JetBrains IDE files (.idea directory)
+.idea/
+/.idea/*.iml
+.idea/inspectionProfiles/
+/.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+
+# Ignore Python cache files
+__pycache__/
+__pycache__/*.pyc
+
