@@ -3,14 +3,34 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import Dashboard from './dashboard/Dashboard';
 import Login from './Login/Login';
+import SignUp from './SignUp/SignUp';
 import reportWebVitals from './reportWebVitals';
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { RouterProvider, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Login />,
+  },
+  {
+    path: '/Login',
+    element: <Login />
+  },
+
+  {
+    path: '/SignUp',
+    element: <SignUp />
+  },
+
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Login />
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
 

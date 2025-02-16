@@ -1,5 +1,6 @@
 // import any CSS styling here
 import "./login-styles.css"
+import { Link } from 'react-router-dom'
 
 // import images from public here
 
@@ -29,8 +30,9 @@ const Login = () => {
                 </div>
             <div classname='submit-container'>
             {/* attach reference to the signup.jsx*/}
-            <a href="">don't have an account? sign up here!
-            </a>
+            <Link to="/signUp" className="text-blue-500 hover:text-blue-700">
+            Don't have an account? Sign up here!
+            </Link>
             </div>
             </div>
         </body>
